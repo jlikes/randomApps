@@ -1,5 +1,5 @@
 import math
-
+#variables
 activity = 0
 gender = 0
 weight = 0
@@ -7,9 +7,17 @@ height = 0
 age = 0
 bmr = 0
 
+#setter functions
 def setGender():
-    print('\nAre you a (1) male or a (2) female?')
-    gender = input()
+    global gender
+    while True:
+        print('\nAre you a (1) male or a (2) female?')
+        gender = input()
+        print(gender)
+        if(gender == '1'):
+            break
+        if(gender == '2'):
+            break
     return gender
 
 def setWeight():
@@ -80,7 +88,8 @@ def calcBmr():
     elif gender == '2':
         bmr = 655.1 + (9.6 *  float(weight)) + (1.8 * float(height)) - (4.7 * float(age))
         return bmr
-    
+
+#program begins here
 gender = setGender()
 weight = setWeight()
 height = setHeight()
