@@ -1,11 +1,4 @@
 import math
-#variables
-activity = 0
-gender = 0
-weight = 0
-height = 0
-age = 0
-bmr = 0
 
 #setter functions
 def setGender():
@@ -47,39 +40,16 @@ def setActivityLevel():
 
 def calToMaintain():
     if activity == '1':
-        print('Calories to maintain = ', int(bmr*1.2))
+        calories = bmr*1.2
     if activity == '2':
-        print('Calories to maintain = ', int(bmr*1.375))
+        calories = bmr*1.375
     if activity == '3':
-        print('Calories to maintain = ', int(bmr*1.55))
+        calories = bmr*1.55
     if activity == '4':
-        print('Calories to maintain = ', int(bmr*1.725))
+        calories = bmr*1.725
     if activity == '5':
-        print('Calories to maintain = ', int(bmr*1.9))
-
-def calToGain():
-    if activity == '1':
-        print('Calories to gain = ', int(bmr*1.2+500))
-    if activity == '2':
-        print('Calories to gain = ', int(bmr*1.375+500))
-    if activity == '3':
-        print('Calories to gain = ', int(bmr*1.55+500))
-    if activity == '4':
-        print('Calories to gain = ', int(bmr*1.725+500))
-    if activity == '5':
-        print('Calories to gain = ', int(bmr*1.9+500))
-
-def calToLose():
-    if activity == '1':
-        print('Calories to lose = ', int(bmr*1.2-500))
-    if activity == '2':
-        print('Calories to lose = ', int(bmr*1.375-500))
-    if activity == '3':
-        print('Calories to lose = ', int(bmr*1.55-500))
-    if activity == '4':
-        print('Calories to lose = ', int(bmr*1.725-500))
-    if activity == '5':
-        print('Calories to maintain = ', int(bmr*1.9-500))
+        calories = bmr*1.375
+    return calories
 
 def calcBmr():
     if gender == '1':
@@ -89,6 +59,12 @@ def calcBmr():
         bmr = 655.1 + (9.6 *  float(weight)) + (1.8 * float(height)) - (4.7 * float(age))
         return bmr
 
+#temporarily based on my own needs, will later take user input for requested breakdown
+def calcMacro():
+    print('\nProtiens per meal = ', int((calories-500)*.5/4/6))
+    print('Carbs per meal = ', int((calories-500)*.4/4/6))
+    print('Fats per meal = ', int((calories-500)*.1/9/5))
+
 #program begins here
 gender = setGender()
 weight = setWeight()
@@ -97,9 +73,11 @@ age = setAge()
 activity = setActivityLevel()
 bmr = calcBmr()
 print()
-calToLose()
-calToMaintain()
-calToGain()
+calories = calToMaintain()
+print('Calories required to maintain = ', int(calories))
+print('Calories required to lose = ', int(calories) - 500)
+print('Calories required to gain = ', int(calories) + 500)
+calcMacro()
 
 
 #debug
